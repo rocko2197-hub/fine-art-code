@@ -1,0 +1,278 @@
+{
+  // ─────────────────────────────────────────────
+  //  Fine Art Code – JavaScript / TypeScript Snippets
+  //  Prefix convention:
+  //    fa-  →  Fine Art general utilities
+  //    fac- →  React / component patterns
+  //    fah- →  Hooks
+  //    fat- →  TypeScript-specific
+  // ─────────────────────────────────────────────
+
+  // ── Async / Fetch ──────────────────────────────
+  "Async Arrow Function": {
+    "prefix": "fa-async",
+    "description": "Async arrow function with try/catch",
+    "body": [
+      "const ${1:fnName} = async (${2:params}) => {",
+      "\ttry {",
+      "\t\t$0",
+      "\t} catch (error) {",
+      "\t\tconsole.error('[${1:fnName}]', error);",
+      "\t\tthrow error;",
+      "\t}",
+      "};"
+    ]
+  },
+
+  "Fetch with Error Handling": {
+    "prefix": "fa-fetch",
+    "description": "fetch() call with response guard and JSON parse",
+    "body": [
+      "const ${1:data} = await fetch('${2:url}', {",
+      "\tmethod: '${3|GET,POST,PUT,PATCH,DELETE|}',",
+      "\theaders: { 'Content-Type': 'application/json' },",
+      "\t${4:body: JSON.stringify(${5:payload}),}",
+      "}).then((res) => {",
+      "\tif (!res.ok) throw new Error(`HTTP \${res.status}: \${res.statusText}`);",
+      "\treturn res.json();",
+      "});"
+    ]
+  },
+
+  // ── Console / Debug ────────────────────────────
+  "Labeled Console Log": {
+    "prefix": "fa-log",
+    "description": "console.log with a styled label for quick visual scanning",
+    "body": [
+      "console.log('%c${1:label}', 'color:#${2:c69b7e};font-weight:bold', ${3:value});"
+    ]
+  },
+
+  "Console Group": {
+    "prefix": "fa-group",
+    "description": "Collapsible console group for structured debug output",
+    "body": [
+      "console.group('${1:groupName}');",
+      "console.log(${2:value});",
+      "console.groupEnd();"
+    ]
+  },
+
+  // ── Object / Array Utilities ───────────────────
+  "Deep Clone": {
+    "prefix": "fa-clone",
+    "description": "structuredClone with JSON fallback comment",
+    "body": [
+      "// structuredClone is ~3× faster than JSON round-trip for plain objects",
+      "const ${1:copy} = structuredClone(${2:source});"
+    ]
+  },
+
+  "Object from Entries": {
+    "prefix": "fa-fromkeys",
+    "description": "Build object from an array using Object.fromEntries",
+    "body": [
+      "const ${1:obj} = Object.fromEntries(",
+      "\t${2:arr}.map((${3:item}) => [${3:item}.${4:key}, ${3:item}])",
+      ");"
+    ]
+  },
+
+  "Array Chunk": {
+    "prefix": "fa-chunk",
+    "description": "Split array into fixed-size chunks",
+    "body": [
+      "const chunk = (arr, size) =>",
+      "\tArray.from({ length: Math.ceil(arr.length / size) }, (_, i) =>",
+      "\t\tarr.slice(i * size, i * size + size)",
+      "\t);",
+      "",
+      "const ${1:chunks} = chunk(${2:array}, ${3:10});"
+    ]
+  },
+
+  // ── React Components ───────────────────────────
+  "React Functional Component": {
+    "prefix": "fac-rfc",
+    "description": "Typed React functional component with props interface",
+    "body": [
+      "import React from 'react';",
+      "",
+      "interface ${1:ComponentName}Props {",
+      "\t${2:prop}: ${3:string};",
+      "}",
+      "",
+      "export const ${1:ComponentName}: React.FC<${1:ComponentName}Props> = ({ ${2:prop} }) => {",
+      "\treturn (",
+      "\t\t<div className=\"${4:${1/(.*)/${1:/downcase}/}}\">",
+      "\t\t\t$0",
+      "\t\t</div>",
+      "\t);",
+      "};",
+      "",
+      "export default ${1:ComponentName};"
+    ]
+  },
+
+  "React Context + Provider": {
+    "prefix": "fac-ctx",
+    "description": "Full context + provider + typed useContext hook",
+    "body": [
+      "import React, { createContext, useContext, useState } from 'react';",
+      "",
+      "interface ${1:Feature}ContextType {",
+      "\t${2:value}: ${3:string};",
+      "\tset${2/(.*)/${1:/capitalize}/}: (v: ${3:string}) => void;",
+      "}",
+      "",
+      "const ${1:Feature}Context = createContext<${1:Feature}ContextType | null>(null);",
+      "",
+      "export const ${1:Feature}Provider: React.FC<{ children: React.ReactNode }> = ({ children }) => {",
+      "\tconst [${2:value}, set${2/(.*)/${1:/capitalize}/}] = useState<${3:string}>(${4:''});",
+      "",
+      "\treturn (",
+      "\t\t<${1:Feature}Context.Provider value={{ ${2:value}, set${2/(.*)/${1:/capitalize}/} }}>",
+      "\t\t\t{children}",
+      "\t\t</${1:Feature}Context.Provider>",
+      "\t);",
+      "};",
+      "",
+      "export const use${1:Feature} = () => {",
+      "\tconst ctx = useContext(${1:Feature}Context);",
+      "\tif (!ctx) throw new Error('use${1:Feature} must be used within ${1:Feature}Provider');",
+      "\treturn ctx;",
+      "};"
+    ]
+  },
+
+  // ── Hooks ──────────────────────────────────────
+  "useEffect with Cleanup": {
+    "prefix": "fah-effect",
+    "description": "useEffect with dependency array and cleanup function",
+    "body": [
+      "useEffect(() => {",
+      "\t$1",
+      "",
+      "\treturn () => {",
+      "\t\t$2 // cleanup",
+      "\t};",
+      "}, [${3:dep}]);"
+    ]
+  },
+
+  "Custom Hook Skeleton": {
+    "prefix": "fah-hook",
+    "description": "Custom hook with loading / error / data state pattern",
+    "body": [
+      "import { useState, useEffect } from 'react';",
+      "",
+      "export function use${1:HookName}(${2:param}: ${3:string}) {",
+      "\tconst [data, setData] = useState<${4:unknown}>(null);",
+      "\tconst [loading, setLoading] = useState(true);",
+      "\tconst [error, setError] = useState<Error | null>(null);",
+      "",
+      "\tuseEffect(() => {",
+      "\t\tlet cancelled = false;",
+      "\t\tsetLoading(true);",
+      "",
+      "\t\t(async () => {",
+      "\t\t\ttry {",
+      "\t\t\t\tconst result = await ${5:fetchData}(${2:param});",
+      "\t\t\t\tif (!cancelled) setData(result);",
+      "\t\t\t} catch (err) {",
+      "\t\t\t\tif (!cancelled) setError(err as Error);",
+      "\t\t\t} finally {",
+      "\t\t\t\tif (!cancelled) setLoading(false);",
+      "\t\t\t}",
+      "\t\t})();",
+      "",
+      "\t\treturn () => { cancelled = true; };",
+      "\t}, [${2:param}]);",
+      "",
+      "\treturn { data, loading, error };",
+      "}"
+    ]
+  },
+
+  // ── TypeScript Utilities ───────────────────────
+  "Utility Types Block": {
+    "prefix": "fat-util",
+    "description": "Common mapped-type utilities scaffolding",
+    "body": [
+      "type Nullable<T> = T | null;",
+      "type Optional<T> = T | undefined;",
+      "type MaybeArray<T> = T | T[];",
+      "type DeepPartial<T> = { [K in keyof T]?: T[K] extends object ? DeepPartial<T[K]> : T[K] };",
+      "$0"
+    ]
+  },
+
+  "Zod Schema + Infer": {
+    "prefix": "fat-zod",
+    "description": "Zod schema with inferred TypeScript type",
+    "body": [
+      "import { z } from 'zod';",
+      "",
+      "export const ${1:Schema} = z.object({",
+      "\t${2:field}: z.${3:string}(),",
+      "});",
+      "",
+      "export type ${1:Schema} = z.infer<typeof ${1:Schema}>;"
+    ]
+  },
+
+  "Framer Motion Variants": {
+    "prefix": "fa-motion",
+    "description": "Framer Motion variant object + motion component",
+    "body": [
+      "import { motion } from 'framer-motion';",
+      "",
+      "const ${1:variants} = {",
+      "\thidden: { opacity: 0, y: ${2:12} },",
+      "\tvisible: {",
+      "\t\topacity: 1,",
+      "\t\ty: 0,",
+      "\t\ttransition: { duration: ${3:0.4}, ease: '${4|easeOut,easeIn,easeInOut|}' },",
+      "\t},",
+      "};",
+      "",
+      "<motion.${5:div}",
+      "\tvariants={${1:variants}}",
+      "\tinitial=\"hidden\"",
+      "\tanimate=\"visible\"",
+      "\t$0",
+      "/>"
+    ]
+  },
+
+  "Zod Schema + React Hook Form": {
+    "prefix": "fa-zod-form",
+    "description": "Zod schema wired to react-hook-form",
+    "body": [
+      "import { z } from 'zod';",
+      "import { zodResolver } from '@hookform/resolvers/zod';",
+      "import { useForm } from 'react-hook-form';",
+      "",
+      "const ${1:formSchema} = z.object({",
+      "\t${2:field}: z.${3:string}().min(1, '${4:Required}'),",
+      "});",
+      "",
+      "type ${1/(.*)/${1:/capitalize}/}Values = z.infer<typeof ${1:formSchema}>;",
+      "",
+      "export function ${5:MyForm}() {",
+      "\tconst form = useForm<${1/(.*)/${1:/capitalize}/}Values>({",
+      "\t\tresolver: zodResolver(${1:formSchema}),",
+      "\t\tdefaultValues: { ${2:field}: '' },",
+      "\t});",
+      "",
+      "\treturn (",
+      "\t\t<form onSubmit={form.handleSubmit((data) => {",
+      "\t\t\t$0",
+      "\t\t})}>",
+      "\t\t\t{/* fields */}",
+      "\t\t</form>",
+      "\t);",
+      "}"
+    ]
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "Flex Center": {
+    "prefix": "fa-flex-center",
+    "description": "Flexbox centering block",
+    "body": [
+      "display: flex;",
+      "align-items: center;",
+      "justify-content: center;",
+      "$0"
+    ]
+  },
+
+  "Grid Auto Fit": {
+    "prefix": "fa-grid",
+    "description": "Responsive auto-fit grid",
+    "body": [
+      "display: grid;",
+      "grid-template-columns: repeat(auto-fit, minmax(${1:16rem}, 1fr));",
+      "gap: ${2:1rem};",
+      "$0"
+    ]
+  },
+
+  "Clamp Typography": {
+    "prefix": "fa-clamp",
+    "description": "Fluid font-size with clamp()",
+    "body": [
+      "font-size: clamp(${1:1rem}, ${2:2vw} + ${3:0.5rem}, ${4:1.5rem});"
+    ]
+  },
+
+  "Focus Ring": {
+    "prefix": "fa-focus",
+    "description": "Accessible focus-visible ring",
+    "body": [
+      "&:focus-visible {",
+      "\toutline: 2px solid ${1:currentColor};",
+      "\toutline-offset: 2px;",
+      "}"
+    ]
+  },
+
+  "Visually Hidden": {
+    "prefix": "fa-sr-only",
+    "description": "Screen-reader-only utility",
+    "body": [
+      "position: absolute;",
+      "width: 1px;",
+      "height: 1px;",
+      "padding: 0;",
+      "margin: -1px;",
+      "overflow: hidden;",
+      "clip: rect(0, 0, 0, 0);",
+      "white-space: nowrap;",
+      "border: 0;"
+    ]
+  },
+
+  "Custom Property Block": {
+    "prefix": "fa-vars",
+    "description": ":root custom properties block",
+    "body": [
+      ":root {",
+      "\t--${1:name}: ${2:value};",
+      "\t$0",
+      "}"
+    ]
+  },
+
+  "Media Query": {
+    "prefix": "fa-mq",
+    "description": "min-width media query",
+    "body": [
+      "@media (min-width: ${1:48rem}) {",
+      "\t$0",
+      "}"
+    ]
+  },
+
+  "Transition": {
+    "prefix": "fa-transition",
+    "description": "Smooth transition shorthand",
+    "body": [
+      "transition: ${1|color,opacity,transform,all|} ${2:0.2s} ${3|ease,ease-in-out,cubic-bezier(0.4,0,0.2,1)|};"
+    ]
+  },
+
+  "Fine Art Theme CSS Variables": {
+    "prefix": "fa-cssvar",
+    "description": "CSS custom properties — Fine Art Code Umber palette",
+    "body": [
+      ":root {",
+      "\t/* Fine Art Code – Umber */",
+      "\t--fa-bg-deep: #2a1510;",
+      "\t--fa-bg-editor: #2e2720;",
+      "\t--fa-bg-sidebar: #3a2f26;",
+      "\t--fa-bg-hover: #3d3028;",
+      "\t--fa-border: #52443a;",
+      "\t--fa-text: #e8ddd0;",
+      "\t--fa-text-secondary: #c4b49e;",
+      "\t--fa-text-muted: #8a7668;",
+      "\t--fa-burnt-umber: #8a3324;",
+      "\t--fa-burnt-umber-light: #a85a44;",
+      "\t--fa-celadon: #6fa58a;",
+      "\t--fa-verdigris: #4d8a6e;",
+      "\t--fa-naples-yellow: #d4a84b;",
+      "\t--fa-yellow-ochre: #e8c87a;",
+      "\t--fa-cerulean: #7aafc4;",
+      "\t--fa-success: #8fbe6e;",
+      "\t$0",
+      "}"
+    ]
+  }
+}

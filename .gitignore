@@ -1,0 +1,7 @@
+node_modules/
+*.vsix
+test.py
+test.css
+test.tsx
+marketplace-extension-*.png
+pallet icon (1).png

@@ -1,0 +1,101 @@
+{
+  "Async Function": {
+    "prefix": "fa-async",
+    "description": "Async function with try/except",
+    "body": [
+      "async def ${1:name}(${2:args}):",
+      "\ttry:",
+      "\t\t$0",
+      "\texcept Exception as error:",
+      "\t\tprint(f'[{1:name}]', error)",
+      "\t\traise"
+    ]
+  },
+
+  "Dataclass": {
+    "prefix": "fa-dataclass",
+    "description": "Dataclass with slots",
+    "body": [
+      "from dataclasses import dataclass",
+      "",
+      "@dataclass(slots=True)",
+      "class ${1:Name}:",
+      "\t${2:field}: ${3:str}"
+    ]
+  },
+
+  "Context Manager": {
+    "prefix": "fa-with",
+    "description": "Context manager block",
+    "body": [
+      "with ${1:resource} as ${2:handle}:",
+      "\t$0"
+    ]
+  },
+
+  "List Comprehension": {
+    "prefix": "fa-comp",
+    "description": "List comprehension with filter",
+    "body": [
+      "[${1:expr} for ${2:item} in ${3:iterable} if ${4:condition}]"
+    ]
+  },
+
+  "Type Hints Function": {
+    "prefix": "fa-def",
+    "description": "Function with type hints and docstring",
+    "body": [
+      "def ${1:name}(${2:param}: ${3:str}) -> ${4:None}:",
+      "\t\"\"\"${5:Description.}\"\"\"",
+      "\t$0"
+    ]
+  },
+
+  "Pydantic Model": {
+    "prefix": "fa-pydantic",
+    "description": "Pydantic BaseModel",
+    "body": [
+      "from pydantic import BaseModel",
+      "",
+      "class ${1:Model}(BaseModel):",
+      "\t${2:field}: ${3:str}"
+    ]
+  },
+
+  "pytest Test": {
+    "prefix": "fa-test",
+    "description": "pytest test function",
+    "body": [
+      "def test_${1:name}():",
+      "\t${2:result} = ${3:call}()",
+      "\tassert ${2:result} == ${4:expected}"
+    ]
+  },
+
+  "Main Guard": {
+    "prefix": "fa-main",
+    "description": "if __name__ == '__main__' block",
+    "body": [
+      "if __name__ == '__main__':",
+      "\t$0"
+    ]
+  },
+
+  "FastAPI Route + Response Model": {
+    "prefix": "fa-fastapi",
+    "description": "FastAPI route decorator with Pydantic response model",
+    "body": [
+      "from fastapi import APIRouter",
+      "from pydantic import BaseModel",
+      "",
+      "router = APIRouter()",
+      "",
+      "class ${1:ResponseModel}(BaseModel):",
+      "\t${2:field}: ${3:str}",
+      "",
+      "@router.${4|get,post,put,patch,delete|}('/${5:path}', response_model=${1:ResponseModel})",
+      "async def ${6:handler}(${7:}) -> ${1:ResponseModel}:",
+      "\treturn ${1:ResponseModel}(${2:field}=${8:value})"
+    ]
+  }
+}

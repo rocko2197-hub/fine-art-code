@@ -1,0 +1,12 @@
+.vscode/**
+scripts/**
+test.py
+test.css
+test.tsx
+node_modules/**
+**/*.map
+.gitignore
+*.vsix
+pallet icon (1).png
+marketplace-extension-overview.png
+marketplace-extension-details.png

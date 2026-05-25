@@ -1,0 +1,78 @@
+{
+  "name": "fine-art-code",
+  "displayName": "Fine Art Code",
+  "description": "Curated code snippets and a fine-art color theory theme for VS Code & Cursor",
+  "version": "0.0.10",
+  "publisher": "Rockosrevelation",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Snippets",
+    "Themes"
+  ],
+  "keywords": [
+    "theme",
+    "snippets",
+    "color theory",
+    "fine art",
+    "productivity"
+  ],
+  "icon": "assets/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/panbnj-stack/fine-art-code"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "label": "Fine Art Code – Umber",
+        "uiTheme": "vs-dark",
+        "path": "./themes/fine-art-umber.json"
+      },
+      {
+        "label": "Fine Art Code – Chalk",
+        "uiTheme": "vs",
+        "path": "./themes/fine-art-chalk.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "javascript",
+        "path": "./snippets/javascript.json"
+      },
+      {
+        "language": "typescript",
+        "path": "./snippets/typescript.json"
+      },
+      {
+        "language": "typescriptreact",
+        "path": "./snippets/typescriptreact.json"
+      },
+      {
+        "language": "python",
+        "path": "./snippets/python.json"
+      },
+      {
+        "language": "css",
+        "path": "./snippets/css.json"
+      }
+    ],
+    "configurationDefaults": {
+      "editor.fontLigatures": true,
+      "editor.cursorBlinking": "phase",
+      "editor.renderWhitespace": "boundary"
+    }
+  },
+  "scripts": {
+    "build:chalk": "node scripts/build-chalk-theme.js",
+    "package": "npm run build:chalk && vsce package --allow-missing-repository",
+    "publish": "vsce publish --baseImagesUrl https://raw.githubusercontent.com/panbnj-stack/fine-art-code/main",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.22.0",
+    "eslint": "^8.56.0"
+  }
+}
