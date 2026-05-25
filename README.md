@@ -3,7 +3,7 @@
 > Curated VS Code / Cursor snippets and color-theory themes inspired by classical pigments, engineered for modern development velocity.
 
 **Publisher:** Rockosrevelation  
-**Version:** 0.0.10  
+**Version:** 0.0.11  
 **Marketplace Identifier:** `Rockosrevelation.fine-art-code`  
 **Categories:** Snippets · Themes  
 **Build Status:** [![DevOps Build](https://img.shields.io/badge/DevOps-Azure_Pipelines-blue)](https://dev.azure.com)
@@ -26,7 +26,7 @@ Fine Art Code ships two themes derived from a strict split-complementary palette
 
 ### Umber (Dark)
 
-![Fine Art Code – Umber theme active in Cursor](https://raw.githubusercontent.com/panbnj-stack/fine-art-code/main/assets/screenshots/umber-preview.png)
+![Fine Art Code – Umber theme active in Cursor](https://raw.githubusercontent.com/rocko2197-hub/fine-art-code/main/assets/screenshots/umber-preview.png)
 
 Grounded in raw umber earth tones to eliminate blue-shifted screen glare. Syntax relationships pair warm Venetian red and cool Celadon green against a high-visibility Naples yellow accent.
 
@@ -44,7 +44,7 @@ Grounded in raw umber earth tones to eliminate blue-shifted screen glare. Syntax
 
 ### Chalk (Light)
 
-![Fine Art Code – Chalk theme active in Cursor](https://raw.githubusercontent.com/panbnj-stack/fine-art-code/main/assets/screenshots/chalk-preview.png)
+![Fine Art Code – Chalk theme active in Cursor](https://raw.githubusercontent.com/rocko2197-hub/fine-art-code/main/assets/screenshots/chalk-preview.png)
 
 The light companion to Umber. Replaces the dark ground with warm, non-reflective paper and ink tones while preserving the *exact same syntax role mappings*. Switching backgrounds never breaks your visual memory of your codebase.
 
@@ -91,7 +91,7 @@ All snippets utilize the unified `fa-` prefix ecosystem for predictable, high-sp
 
 ## 🤝 Contributing & Issue Tracking
 
-Bugs, feature requests, or structural snippet proposals can be submitted via [GitHub Issues](https://github.com/panbnj-stack/fine-art-code/issues) or the [Marketplace Q & A tab](https://marketplace.visualstudio.com/items?itemName=Rockosrevelation.fine-art-code&ssr=false#qna).
+Bugs, feature requests, or structural snippet proposals can be submitted via [GitHub Issues](https://github.com/rocko2197-hub/fine-art-code/issues) or the [Marketplace Q & A tab](https://marketplace.visualstudio.com/items?itemName=Rockosrevelation.fine-art-code&ssr=false#qna).
 
 ---
 *Fine Art Code — Precision engineering meets classical color-theory analytics.*

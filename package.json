@@ -2,7 +2,7 @@
   "name": "fine-art-code",
   "displayName": "Fine Art Code",
   "description": "Curated code snippets and a fine-art color theory theme for VS Code & Cursor",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "publisher": "Rockosrevelation",
   "engines": {
     "vscode": "^1.85.0"
@@ -21,7 +21,7 @@
   "icon": "assets/icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/panbnj-stack/fine-art-code"
+    "url": "https://github.com/rocko2197-hub/fine-art-code"
   },
   "contributes": {
     "themes": [
@@ -67,7 +67,7 @@
   "scripts": {
     "build:chalk": "node scripts/build-chalk-theme.js",
     "package": "npm run build:chalk && vsce package --allow-missing-repository",
-    "publish": "vsce publish --baseImagesUrl https://raw.githubusercontent.com/panbnj-stack/fine-art-code/main",
+    "publish": "vsce publish --baseImagesUrl https://raw.githubusercontent.com/rocko2197-hub/fine-art-code/main",
     "lint": "eslint ."
   },
   "devDependencies": {
