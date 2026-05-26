@@ -3,7 +3,7 @@
 > Curated VS Code / Cursor snippets and color-theory themes inspired by classical pigments, engineered for modern development velocity.
 
 **Publisher:** Rockosrevelation  
-**Version:** 0.0.15  
+**Version:** 0.0.16  
 **Marketplace Identifier:** `Rockosrevelation.fine-art-code`  
 **Categories:** Snippets · Themes  
 **Build Status:** [![DevOps Build](https://img.shields.io/badge/DevOps-Azure_Pipelines-blue)](https://dev.azure.com)
@@ -65,9 +65,11 @@ All snippets utilize the unified `fa-` prefix ecosystem for predictable, high-sp
 * `fa-zod-form`: Automates a schema-driven validation form wired completely to a Zod runtime layer.
 
 ### Enterprise Python & Styling
-* `fa-pydantic`: Scaffolds rigid data-validation contracts using Pydantic schemas.
-* `fa-fastapi`: Drops a structured FastAPI route controller initialized with explicit HTTP methods and performance tracking.
-* `fa-grid`: Drops an industry-standard modern CSS Grid structural scaffold complete with fluid responsive positioning rules.
+* `fa-pydantic` / `fa-py-pydantic`: Pydantic schemas — quick strict model or full enterprise contract (UUID, timestamps).
+* `fa-fastapi` / `fa-py-fastapi`: FastAPI routes — response-model controller or GET-by-id with telemetry.
+* `fa-async`: Async function with perf timing and structured logging.
+* `fa-grid` / `fa-css-grid`: CSS Grid — inline properties or fluid wrapper class layout.
+* `fa-cssvar`: Fine Art Code Umber design tokens (color, spacing, radius, motion).
 
 ---
 

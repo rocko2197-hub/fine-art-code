@@ -1,26 +1,162 @@
 {
-  "Async Function": {
+  "Async Function Block with Telemetry": {
     "prefix": "fa-async",
-    "description": "Async function with try/except",
+    "description": "Async function with perf timing, structured logging, and isolated error boundaries.",
     "body": [
-      "async def ${1:name}(${2:args}):",
+      "import logging",
+      "import time",
+      "",
+      "logger = logging.getLogger(__name__)",
+      "",
+      "",
+      "async def ${1:function_name}(${2:context}) -> ${3:None}:",
+      "\t\"\"\"${4:Executable logic unit with isolated catch boundaries.}\"\"\"",
+      "\tstart = time.perf_counter()",
+      "\ttry:",
+      "\t\tlogger.info('[%s] Execution initiated.', '${1:function_name}')",
+      "\t\t$0",
+      "\t\tduration_ms = (time.perf_counter() - start) * 1000",
+      "\t\tlogger.info('[%s] Execution succeeded in %.2fms.', '${1:function_name}', duration_ms)",
+      "\texcept Exception as error:",
+      "\t\tduration_ms = (time.perf_counter() - start) * 1000",
+      "\t\tlogger.exception('[%s] Critical failure after %.2fms.', '${1:function_name}', duration_ms)",
+      "\t\t# TODO: Implement telemetry / crash reporting connection here",
+      "\t\traise"
+    ]
+  },
+
+  "Production Pydantic Schema": {
+    "prefix": "fa-pydantic",
+    "description": "Strict Pydantic v2 model with Field constraints, ConfigDict, and inferred typing.",
+    "body": [
+      "from pydantic import BaseModel, ConfigDict, Field",
+      "",
+      "",
+      "class ${1:Model}(BaseModel):",
+      "\t\"\"\"${2:Validated data contract for domain payloads.}\"\"\"",
+      "",
+      "\tmodel_config = ConfigDict(",
+      "\t\tstrict=True,",
+      "\t\textra='forbid',",
+      "\t\tstr_strip_whitespace=True,",
+      "\t)",
+      "",
+      "\t${3:field}: ${4:str} = Field(..., min_length=1, description='${5:Required field}')",
+      "\t$0"
+    ]
+  },
+
+  "Enterprise FastAPI Route": {
+    "prefix": "fa-fastapi",
+    "description": "FastAPI route with response model, HTTPException guards, and async error handling.",
+    "body": [
+      "import logging",
+      "import time",
+      "",
+      "from fastapi import APIRouter, HTTPException, status",
+      "from pydantic import BaseModel, Field",
+      "",
+      "logger = logging.getLogger(__name__)",
+      "router = APIRouter(prefix='/${1:resource}', tags=['${1:resource}'])",
+      "",
+      "",
+      "class ${2:ResponseModel}(BaseModel):",
+      "\t${3:field}: ${4:str} = Field(..., description='${5:Response payload field}')",
+      "",
+      "",
+      "@router.${6|get,post,put,patch,delete|}(",
+      "\t'/${7:path}',",
+      "\tresponse_model=${2:ResponseModel},",
+      "\tstatus_code=status.HTTP_200_OK,",
+      ")",
+      "async def ${8:handler}() -> ${2:ResponseModel}:",
+      "\tstart = time.perf_counter()",
       "\ttry:",
       "\t\t$0",
+      "\t\treturn ${2:ResponseModel}(${3:field}=${9:value})",
+      "\texcept HTTPException:",
+      "\t\traise",
       "\texcept Exception as error:",
-      "\t\tprint(f'[{1:name}]', error)",
-      "\t\traise"
+      "\t\tlogger.exception('Route failure on /${7:path} after %.2fms', (time.perf_counter() - start) * 1000)",
+      "\t\traise HTTPException(",
+      "\t\t\tstatus_code=status.HTTP_500_INTERNAL_SERVER_ERROR,",
+      "\t\t\tdetail='Internal transport exception during request execution.',",
+      "\t\t) from error",
+      "\tfinally:",
+      "\t\tprocess_time = (time.perf_counter() - start) * 1000",
+      "\t\tlogger.info('[Telemetry] /${1:resource}/${7:path} resolved in %.2fms', process_time)"
+    ]
+  },
+
+  "Production Pydantic BaseContract": {
+    "prefix": "fa-py-pydantic",
+    "description": "Scaffolds an enterprise-grade Pydantic data validation model equipped with strict attribute configs, trimming rules, and explicit metadata fields.",
+    "body": [
+      "from datetime import datetime",
+      "from typing import Optional",
+      "from uuid import UUID",
+      "",
+      "from pydantic import BaseModel, Field",
+      "",
+      "",
+      "class ${1:ModelName}Contract(BaseModel):",
+      "\t\"\"\"",
+      "\tData validation and serialization contract for ${1:ModelName}.",
+      "\tEnforces strict runtime typing and sanitization boundaries.",
+      "\t\"\"\"",
+      "",
+      "\tid: UUID = Field(..., description='Unique system identifier')",
+      "\tcreated_at: datetime = Field(default_factory=datetime.utcnow, description='ISO compilation timestamp')",
+      "\tupdated_at: Optional[datetime] = Field(None, description='Last mutation timestamp')",
+      "\tis_active: bool = Field(default=True, description='Operational status indicator')",
+      "\t$0",
+      "",
+      "\tclass Config:",
+      "\t\tfrom_attributes = True",
+      "\t\tpopulate_by_name = True",
+      "\t\tstr_strip_whitespace = True"
+    ]
+  },
+
+  "Guarded FastAPI Endpoint Controller": {
+    "prefix": "fa-py-fastapi",
+    "description": "Scaffolds a clean FastAPI route controller backed by execution-time telemetry and strict try-except error catching boundaries.",
+    "body": [
+      "import time",
+      "",
+      "from fastapi import APIRouter, HTTPException, status",
+      "",
+      "router = APIRouter(prefix='/${1:endpoint}', tags=['${2:Tag}'])",
+      "",
+      "",
+      "@router.get('/{id}', status_code=status.HTTP_200_OK)",
+      "async def get_${3:resource}_by_id(id: str):",
+      "\tstart_time = time.perf_counter()",
+      "\ttry:",
+      "\t\t# TODO: Implement secure database extraction layer here",
+      "\t\t$0",
+      "\t\treturn {'status': 'success', 'payload': f'Resource {id} tracking initialized.'}",
+      "\texcept Exception as exc:",
+      "\t\traise HTTPException(",
+      "\t\t\tstatus_code=status.HTTP_500_INTERNAL_SERVER_ERROR,",
+      "\t\t\tdetail=f'Internal transaction failure: {str(exc)}',",
+      "\t\t) from exc",
+      "\tfinally:",
+      "\t\tprocess_time = (time.perf_counter() - start_time) * 1000",
+      "\t\tprint(f'[Telemetry] /${1:endpoint}/{id} resolved in {process_time:.2f}ms')"
     ]
   },
 
   "Dataclass": {
     "prefix": "fa-dataclass",
-    "description": "Dataclass with slots",
+    "description": "Dataclass with slots and frozen option",
     "body": [
       "from dataclasses import dataclass",
       "",
-      "@dataclass(slots=True)",
-      "class ${1:Name}:",
-      "\t${2:field}: ${3:str}"
+      "",
+      "@dataclass(slots=True, frozen=${1|true,false|})",
+      "class ${2:Name}:",
+      "\t${3:field}: ${4:str}"
     ]
   },
 
@@ -51,17 +187,6 @@
     ]
   },
 
-  "Pydantic Model": {
-    "prefix": "fa-pydantic",
-    "description": "Pydantic BaseModel",
-    "body": [
-      "from pydantic import BaseModel",
-      "",
-      "class ${1:Model}(BaseModel):",
-      "\t${2:field}: ${3:str}"
-    ]
-  },
-
   "pytest Test": {
     "prefix": "fa-test",
     "description": "pytest test function",
@@ -78,24 +203,6 @@
     "body": [
       "if __name__ == '__main__':",
       "\t$0"
-    ]
-  },
-
-  "FastAPI Route + Response Model": {
-    "prefix": "fa-fastapi",
-    "description": "FastAPI route decorator with Pydantic response model",
-    "body": [
-      "from fastapi import APIRouter",
-      "from pydantic import BaseModel",
-      "",
-      "router = APIRouter()",
-      "",
-      "class ${1:ResponseModel}(BaseModel):",
-      "\t${2:field}: ${3:str}",
-      "",
-      "@router.${4|get,post,put,patch,delete|}('/${5:path}', response_model=${1:ResponseModel})",
-      "async def ${6:handler}(${7:}) -> ${1:ResponseModel}:",
-      "\treturn ${1:ResponseModel}(${2:field}=${8:value})"
     ]
   }
 }

@@ -2,7 +2,7 @@
   "name": "fine-art-code",
   "displayName": "Fine Art Code",
   "description": "Curated code snippets and a fine-art color theory theme for VS Code & Cursor",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "publisher": "Rockosrevelation",
   "engines": {
     "vscode": "^1.85.0"
