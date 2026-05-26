@@ -3,7 +3,7 @@
 > Curated VS Code / Cursor snippets and color-theory themes inspired by classical pigments, engineered for modern development velocity.
 
 **Publisher:** Rockosrevelation  
-**Version:** 0.0.14  
+**Version:** 0.0.15  
 **Marketplace Identifier:** `Rockosrevelation.fine-art-code`  
 **Categories:** Snippets · Themes  
 **Build Status:** [![DevOps Build](https://img.shields.io/badge/DevOps-Azure_Pipelines-blue)](https://dev.azure.com)
