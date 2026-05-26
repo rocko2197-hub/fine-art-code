@@ -9,33 +9,55 @@
   // ─────────────────────────────────────────────
 
   // ── Async / Fetch ──────────────────────────────
-  "Async Arrow Function": {
+  "Async Function Block with Telemetry": {
     "prefix": "fa-async",
-    "description": "Async arrow function with try/catch",
+    "description": "Scaffolds a robust async arrow function wrapper complete with explicit try/catch blocks and high-precision performance tracking telemetry.",
     "body": [
-      "const ${1:fnName} = async (${2:params}) => {",
+      "/**",
+      " * ${1:functionName} - Executable logic unit with isolated catch boundaries.",
+      " * @param {Object} context - Execution payload",
+      " */",
+      "const ${1:functionName} = async (${2:context}) => {",
+      "\tconst startTime = performance.now();",
       "\ttry {",
+      "\t\tconsole.log(`[${1:functionName}] Execution initiated.`);",
       "\t\t$0",
+      "\t\tconst duration = (performance.now() - startTime).toFixed(2);",
+      "\t\tconsole.log(`[${1:functionName}] Execution succeeded in ${duration}ms.`);",
       "\t} catch (error) {",
-      "\t\tconsole.error('[${1:fnName}]', error);",
+      "\t\tconst duration = (performance.now() - startTime).toFixed(2);",
+      "\t\tconsole.error(`[${1:functionName}] Critical failure after ${duration}ms:`, error.message);",
+      "\t\t// TODO: Implement telemetry / crash reporting connection here",
       "\t\tthrow error;",
       "\t}",
       "};"
     ]
   },
 
-  "Fetch with Error Handling": {
+  "Guarded Native Fetch Engine": {
     "prefix": "fa-fetch",
-    "description": "fetch() call with response guard and JSON parse",
+    "description": "Generates a resilient native fetch sequence complete with network status guards, explicit header typing, and automatic JSON response parsing.",
     "body": [
-      "const ${1:data} = await fetch('${2:url}', {",
-      "\tmethod: '${3|GET,POST,PUT,PATCH,DELETE|}',",
-      "\theaders: { 'Content-Type': 'application/json' },",
-      "\t${4:body: JSON.stringify(${5:payload}),}",
-      "}).then((res) => {",
-      "\tif (!res.ok) throw new Error(`HTTP \${res.status}: \${res.statusText}`);",
-      "\treturn res.json();",
-      "});"
+      "/**",
+      " * Secure HTTP Fetch Wrapper",
+      " * @param {string} url - Target endpoint URI",
+      " */",
+      "const fetchPayload = async (${1:url}) => {",
+      "\tconst response = await fetch(${1:url}, {",
+      "\t\tmethod: '${2:GET}',",
+      "\t\theaders: {",
+      "\t\t\t'Content-Type': 'application/json',",
+      "\t\t\t'Accept': 'application/json'",
+      "\t\t}",
+      "\t});",
+      "",
+      "\tif (!response.ok) {",
+      "\t\tthrow new Error(`HTTP Transport Exception: Status ${response.status} explicitly returned by remote infrastructure.`);",
+      "\t}",
+      "",
+      "\tconst data = await response.json();",
+      "\treturn data;",
+      "};"
     ]
   },
 

@@ -3,7 +3,7 @@
 > Curated VS Code / Cursor snippets and color-theory themes inspired by classical pigments, engineered for modern development velocity.
 
 **Publisher:** Rockosrevelation  
-**Version:** 0.0.13  
+**Version:** 0.0.14  
 **Marketplace Identifier:** `Rockosrevelation.fine-art-code`  
 **Categories:** Snippets · Themes  
 **Build Status:** [![DevOps Build](https://img.shields.io/badge/DevOps-Azure_Pipelines-blue)](https://dev.azure.com)
@@ -26,7 +26,7 @@ Fine Art Code ships two themes derived from a strict split-complementary palette
 
 ### Umber (Dark)
 
-![Fine Art Code – Umber theme active in Cursor](https://raw.githubusercontent.com/rocko2197-hub/fine-art-code/main/assets/screenshots/umber-preview.png)
+![Fine Art Code – Umber theme active in Cursor](https://raw.githubusercontent.com/rocko2197-hub/fine-art-code/main/assets/screenshots/umber-preview.png?v=2)
 
 Grounded in raw umber earth tones to eliminate blue-shifted screen glare. Syntax relationships pair warm Venetian red and cool Celadon green against a high-visibility Naples yellow accent.
 
@@ -44,7 +44,7 @@ Grounded in raw umber earth tones to eliminate blue-shifted screen glare. Syntax
 
 ### Chalk (Light)
 
-![Fine Art Code – Chalk theme active in Cursor](https://raw.githubusercontent.com/rocko2197-hub/fine-art-code/main/assets/screenshots/chalk-preview.png)
+![Fine Art Code – Chalk theme active in Cursor](https://raw.githubusercontent.com/rocko2197-hub/fine-art-code/main/assets/screenshots/chalk-preview.png?v=2)
 
 The light companion to Umber. Replaces the dark ground with warm, non-reflective paper and ink tones while preserving the *exact same syntax role mappings*. Switching backgrounds never breaks your visual memory of your codebase.
 
